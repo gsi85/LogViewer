@@ -1,0 +1,20 @@
+<head>
+  <title>log-viewer</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
+    </header>
+ 
+	{{#each logs}}
+		{{> log}}
+	{{/each}}
+
+  </div>
+</body>
+ 
+<template name="log">
+  <div>{{text}}</div>
+</template>
