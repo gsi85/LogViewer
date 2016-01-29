@@ -1,11 +1,6 @@
-if (Meteor.isServer) {
-    Meteor.startup(function() {
-        Log.remove({});
-
-        var filePath = NpmPath.join('e:\\Laci', 'clintonma.txt')
-
-        NpmFileSystem.watchFile(filePath, Meteor.bindEnvironment(function() {
-            parseLog(filePath);
-        }));
+Meteor.startup(function() {
+    Log.remove({});
+    WatchedFile.find().forEach(function(watchedFile) {
+        addWatcher(watchedFile._id, watchedFile.filePath);
     });
-}
+});

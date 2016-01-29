@@ -5,15 +5,35 @@
 <body>
   <div class="container">
     <header>
-      <h1>Todo List</h1>
+      <h1>Log viewer</h1>
     </header>
+
+    <h2>Watched files</h2>
+    <form class="new-file">
+      Select new log file to watch<br/>
+      <input type="text" name="filePath" placeholder="Full file path" />
+      <input type="text" name="alias" placeholder="Short name (optional)" />
+      <input type="submit" value="OK" name="submit" />
+    </form>
+    <ul>
+      {{#each watchedFiles}}
+        {{> watchedFile}}
+      {{/each}}
+    </ul>
  
-	{{#each logs}}
-		{{> log}}
-	{{/each}}
+    {{#each logs}}
+    	{{> log}}
+    {{/each}}
 
   </div>
 </body>
+
+<template name="watchedFile">
+  <li>
+    <button class="delete">&times;</button>
+    {{filePath}}
+  </li>
+</template>
  
 <template name="log">
   <div>{{text}}</div>

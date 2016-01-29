@@ -1,9 +1,10 @@
-if (Meteor.isClient) {
-
-    Template.body.helpers({
-        logs: function() {
-            return Log.find({});
-        }
-    });
-
+logs = function() {
+    return Log.find({});
 }
+
+watchedFiles = function() {
+    return WatchedFile.find({});
+}
+
+Template.registerHelper('logs', logs);
+Template.registerHelper('watchedFiles', watchedFiles);
