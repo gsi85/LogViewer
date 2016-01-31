@@ -1,12 +1,17 @@
 [{
     "name": "Logback - test",
     "prefixElements": [{
-        "name": "timeStamp",
-        "format": "YYYY-MM-DD HH:mm:ss"
+        "name": "date"
+    }, {
+        "name": "time"
     }, {
         "name": "level"
     }, {
         "name": "class name"
     }],
-    "prefixMessageSeparator": "-"
+    "timeStamp": {
+        "elements": ["date", "time"],
+        "elementsDelimiter": " ",
+        "format": "YYYY-MM-DD HH:mm:ss"
+    }
 }]

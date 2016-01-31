@@ -1,5 +1,5 @@
 logs = function() {
-    return Log.find({});
+    return Log.find({}, {sort: {timeStamp: -1}});
 }
 
 watchedFiles = function() {

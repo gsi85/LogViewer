@@ -45,5 +45,10 @@
 </template>
  
 <template name="log">
-  <div>{{text}}</div>
+  <div class="log-entry">
+    {{#each text}}
+      {{this}}<br/>
+    {{/each}}
+  </div>
+  <br/>
 </template>
