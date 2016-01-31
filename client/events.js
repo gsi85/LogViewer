@@ -2,12 +2,12 @@ Template.body.events({
     "submit .new-file": function(event) {
         event.preventDefault();
 
-        var filePath = event.target.filePath.value;
-
-        if (filePath.trim() != "") {
+        var filePath = event.target.filePath.value.trim();
+        if (filePath != "") {
             WatchedFile.insert({
                 filePath: filePath,
-                alias: event.target.alias.value.trim()
+                alias: event.target.alias.value.trim(),
+                logPattern: LogPatterns.findOne(event.target.logPattern.value)
             });
         }
 

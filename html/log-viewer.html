@@ -13,6 +13,11 @@
       Select new log file to watch<br/>
       <input type="text" name="filePath" placeholder="Full file path" />
       <input type="text" name="alias" placeholder="Short name (optional)" />
+      <select name="logPattern">
+        {{#each logPatterns}}
+          {{> logPattern}}
+        {{/each}}
+      </select>
       <input type="submit" value="OK" name="submit" />
     </form>
     <ul>
@@ -27,6 +32,10 @@
 
   </div>
 </body>
+
+<template name="logPattern">
+  <option value="{{_id}}">{{name}}</option>
+</template>
 
 <template name="watchedFile">
   <li>

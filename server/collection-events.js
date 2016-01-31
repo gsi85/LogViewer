@@ -1,7 +1,8 @@
+var NpmFileSystem = Npm.require('fs');
 var watchers = [];
 
 WatchedFile.before.insert(function(userId, watchedFile) {
-    addWatcher(watchedFile._id, watchedFile.filePath);
+    addWatcher(watchedFile);
 });
 
 WatchedFile.before.remove(function(userId, watchedFile) {
@@ -9,12 +10,12 @@ WatchedFile.before.remove(function(userId, watchedFile) {
 });
 
 
-addWatcher = function(id, filePath) {
-    watchers[id] = NpmFileSystem.watch(filePath, Meteor.bindEnvironment(function() {
-        parseLog(filePath);
+addWatcher = function(watchedFile) {
+    watchers[watchedFile._id] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
+        parseLog(watchedFile);
     }));
-    console.log("added watcher to " + filePath);
-    parseLog(filePath, true);
+    console.log("added watcher to " + watchedFile.filePath);
+    parseLog(watchedFile, true);
 }
 
 removeWatcher = function(id, filePath) {
