@@ -3,6 +3,7 @@ var OperatingSystem = Npm.require('os');
 var lastLengths = [];
 
 parseLog = function(watchedFile, firstTimeRun) {
+    console.log('file changed');
     var currentTime = new Date().getTime();
 
     try {
@@ -10,9 +11,6 @@ parseLog = function(watchedFile, firstTimeRun) {
         var data = NpmFileSystem.readFileSync(filePath, 'utf8');
         if (firstTimeRun || lastLengths[filePath] != data.length) {
             lastLengths[filePath] = data.length;
-            Log.remove({
-                source: filePath
-            });
             processLog(data.split(/\r?\n/), watchedFile);
             console.log('updated source: ' + filePath);
         }
@@ -23,16 +21,31 @@ parseLog = function(watchedFile, firstTimeRun) {
 
 var processLog = function(data, watchedFile) {
     var textArray = [];
+    var latestEntry = Log.findOne({
+        source: watchedFile.filePath
+    }, {
+        sort: {
+            timeStamp: -1
+        }
+    });
     for (var index = data.length - 1; index >= 0; --index) {
         textArray.push(data[index]);
         var headers = parseHeaders(data[index].split(/\s+/), watchedFile.logPattern);
         //last check required due to what it seems like to be a bug in momentjs' parser, when incorrect format is parsed to date
         if ("timeStamp" in headers && headers["timeStamp"] != "Invalid Date" && headers["timeStamp"] > new Date(2010, 1, 1)) {
-            Log.insert({
-                timeStamp: headers["timeStamp"],
-                source: watchedFile.filePath,
-                text: textArray.reverse()
-            });
+            if (latestEntry == undefined || latestEntry.timeStamp <= headers["timeStamp"]) {
+                Log.upsert({
+                    timeStamp: headers["timeStamp"],
+                    source: watchedFile.filePath,
+                    text: textArray.reverse()
+                }, {
+                    $set: {
+                        timeStamp: headers["timeStamp"],
+                        source: watchedFile.filePath,
+                        text: textArray
+                    }
+                });
+            }
             textArray = [];
         }
     }
