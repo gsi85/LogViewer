@@ -13,3 +13,6 @@ logPatterns = function() {
 Template.registerHelper('logs', logs);
 Template.registerHelper('watchedFiles', watchedFiles);
 Template.registerHelper('logPatterns', logPatterns);
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('YYYY-MM-DD HH:mm:ss,SSS');
+});

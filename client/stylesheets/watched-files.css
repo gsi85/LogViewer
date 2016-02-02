@@ -1,0 +1,39 @@
+.whatched-files-container {
+    background-color: #e0e0e0;
+    padding: 6px;
+}
+
+.whatched-files-list {
+    display:none; 
+    height:auto;
+    margin:0;
+}
+
+.show {
+    display: none; 
+}
+.hide:target + .show {
+    display: inline; 
+}
+.hide:target {
+    display: none; 
+}
+.hide:target ~ .whatched-files-list {
+    display:inline; 
+}
+
+.remove-button {
+  -webkit-border-radius: 5;
+  -moz-border-radius: 5;
+  border-radius: 5px;
+  border:none;
+  color: #ffffff;
+  font-size: 15px;
+  background: #d93434;
+  text-decoration: none;
+}
+
+.remove-button:hover {
+  background: #7d0000;
+  text-decoration: none;
+}

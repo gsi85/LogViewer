@@ -1,0 +1,68 @@
+<head>
+  <title>log-viewer</title>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1><span class="bold-text">Log viewer</span> ></h1>
+    </header>
+
+    <div class="whatched-files-container">
+      <a href="#hide" class="hide" id="hide">Watched files +</a>
+      <a href="#show" class="show" id="show">Watched files -</a>
+      <div class="whatched-files-list">
+        <ul>
+          {{#each watchedFiles}}
+            {{> watchedFile}}
+          {{/each}}
+        </ul>
+        <form class="new-file">
+          Select new log file to watch&nbsp;
+          <input type="text" name="filePath" placeholder="Full file path" />
+          <input type="text" name="alias" placeholder="Short name (optional)" />
+          <select name="logPattern">
+            {{#each logPatterns}}
+              {{> logPattern}}
+            {{/each}}
+          </select>
+          <input type="submit" value="OK" name="submit" />
+        </form>
+      </div>
+    </div>
+
+ 
+    <table>
+    <tr>
+      <th>Time</th>
+      <th>Event</th>
+    </tr>
+      {{#each logs}}
+        {{> log}}
+      {{/each}}
+    </table>
+
+  </div>
+</body>
+
+<template name="watchedFile">
+  <li>
+    <button class="delete remove-button">&times;</button>
+    <span class="bold-text">{{alias}}</span> <span class="small-text">({{filePath}})</span>
+  </li>
+</template>
+
+<template name="logPattern">
+  <option value="{{_id}}">{{name}}</option>
+</template>
+ 
+<template name="log">
+  <tr>
+    <td nowrap>{{formatDate timeStamp}}</td>
+    <td class="log-entry">
+      {{#each text}}
+        {{this}}<br/>
+      {{/each}}
+    </td>
+  </tr>
+</template>

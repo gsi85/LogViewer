@@ -1,0 +1,61 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+    font-size: 14px;
+    color:#333;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: "Roboto","Droid","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 12px;
+    vertical-align: baseline;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 16px;
+    vertical-align: baseline;
+    color: #FFF;
+}
+
+h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 18px;
+    vertical-align: baseline;
+}
+
+header {
+    background-color: #000;
+    font: inherit;
+    padding-left: 20px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+th {
+    border: 1px solid #bfbfbf;
+    background-color: #eee;
+    
+}
+
+td {
+    vertical-align: top;
+    border: 1px solid #bfbfbf;
+    padding: 5px;
+}
+
+.log-entry {
+    font-family: Courier;
+}
