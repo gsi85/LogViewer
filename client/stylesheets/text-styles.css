@@ -2,6 +2,18 @@
     font-size: 11px;
 }
 
+.large-text {
+    font-size: 16px;
+}
+
 .bold-text {
     font-weight: bold;
+}
+
+.ligth-grey-text {
+    color: #999;
+}
+
+.green-text {
+    color: green;
 }

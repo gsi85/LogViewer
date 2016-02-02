@@ -1,5 +1,5 @@
 Template.body.events({
-    "submit .new-file": function(event) {
+    "submit .new-file-form": function(event) {
         event.preventDefault();
 
         var filePath = event.target.filePath.value.trim();

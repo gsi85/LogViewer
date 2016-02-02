@@ -1,39 +1,79 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
 .whatched-files-container {
-    background-color: #e0e0e0;
-    padding: 6px;
+  background-color: #e0e0e0;
+  padding: 15px;
+}
+
+.new-file-form-container {
+  border-top: 1px solid #999;
+  padding-top: 10px;
+  padding-left: 50px;
 }
 
 .whatched-files-list {
-    display:none; 
-    height:auto;
-    margin:0;
+  display:none; 
+  height:auto;
+  margin:0;
 }
 
 .show {
-    display: none; 
+  display: none; 
 }
 .hide:target + .show {
-    display: inline; 
+  display: inline; 
 }
 .hide:target {
-    display: none; 
+  display: none; 
 }
 .hide:target ~ .whatched-files-list {
-    display:inline; 
+  display:inline; 
+}
+
+.watched-files {
+  float: left;
+  margin-left: 15px;
+}
+
+.arrow-right {
+  width: 0px; 
+  height: 0px; 
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 6px solid green;
+}
+
+.arrow-down {
+  width: 0; 
+  height: 0;
+  margin-top: 3px; 
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 7px solid green;
 }
 
 .remove-button {
-  -webkit-border-radius: 5;
-  -moz-border-radius: 5;
-  border-radius: 5px;
-  border:none;
-  color: #ffffff;
-  font-size: 15px;
-  background: #d93434;
+  border:1px solid #e0e0e0;
+  font-weight: bold;
   text-decoration: none;
 }
 
 .remove-button:hover {
-  background: #7d0000;
+  background: #ccc;
   text-decoration: none;
+  border:1px solid #999;
+}
+
+.submit-button {
+  border: 1px solid green;
+  font-weight: bold;
+  color: green;
+  text-decoration: none;
+  background-color: white;
+  font-family: "Roboto","Droid","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.submit-button:hover {
+  color: white;
+  background-color: green;
 }

@@ -1,0 +1,21 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    border: 1px solid #bfbfbf;
+    background-color: #eee;
+    
+}
+
+td {
+    vertical-align: top;
+    border: 1px solid #bfbfbf;
+    padding: 5px;
+}
+
+.log-entry {
+    font-family: monospace;
+    margin-bottom: 2px;
+}

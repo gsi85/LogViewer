@@ -1,37 +1,40 @@
 <head>
-  <title>log-viewer</title>
+  <title>log_viewer></title>
+  <meta charset="utf-8" />
 </head>
 
 <body>
   <div class="container">
     <header>
-      <h1><span class="bold-text">Log viewer</span> ></h1>
+      <h1 class="large-text"><span class="bold-text">log_viewer</span> <span class="green-text">></span></h1>
     </header>
 
     <div class="whatched-files-container">
-      <a href="#hide" class="hide" id="hide">Watched files +</a>
-      <a href="#show" class="show" id="show">Watched files -</a>
+      <a href="#hide" class="hide bold-text" id="hide"><div class="watched-files">Watched files</div><div class="arrow-right"></div></a>
+      <a href="#show" class="show bold-text" id="show"><div class="watched-files">Watched files</div><div class="arrow-down"></div></a>
       <div class="whatched-files-list">
         <ul>
           {{#each watchedFiles}}
             {{> watchedFile}}
           {{/each}}
         </ul>
-        <form class="new-file">
-          Select new log file to watch&nbsp;
-          <input type="text" name="filePath" placeholder="Full file path" />
-          <input type="text" name="alias" placeholder="Short name (optional)" />
-          <select name="logPattern">
-            {{#each logPatterns}}
-              {{> logPattern}}
-            {{/each}}
-          </select>
-          <input type="submit" value="OK" name="submit" />
-        </form>
+        <div class="new-file-form-container">
+          <form class="new-file-form">
+            Select new log file to watch&nbsp;
+            <input type="text" name="filePath" placeholder="Full file path" />
+            <input type="text" name="alias" placeholder="Short name (optional)" />
+            log pattern
+            <select name="logPattern">
+              {{#each logPatterns}}
+                {{> logPattern}}
+              {{/each}}
+            </select>&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="OK" name="submit" class="submit-button" />
+          </form>
+        </div>
       </div>
     </div>
 
- 
     <table>
     <tr>
       <th>Time</th>
@@ -47,7 +50,7 @@
 
 <template name="watchedFile">
   <li>
-    <button class="delete remove-button">&times;</button>
+    <button class="delete remove-button large-text">&times;</button>
     <span class="bold-text">{{alias}}</span> <span class="small-text">({{filePath}})</span>
   </li>
 </template>
@@ -59,10 +62,15 @@
 <template name="log">
   <tr>
     <td nowrap>{{formatDate timeStamp}}</td>
-    <td class="log-entry">
-      {{#each text}}
-        {{this}}<br/>
-      {{/each}}
+    <td>
+      <div class="log-entry">
+        {{#each text}}
+          {{{formatLogText this}}}<br/>
+        {{/each}}
+      </div>
+      <div class="small-text">
+        <span class="ligth-grey-text">source=</span>{{source}}
+      </div>
     </td>
   </tr>
 </template>
