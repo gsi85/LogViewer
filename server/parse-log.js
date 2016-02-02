@@ -1,9 +1,7 @@
 var NpmFileSystem = Npm.require('fs');
-var OperatingSystem = Npm.require('os');
 var lastLengths = [];
 
 parseLog = function(watchedFile, firstTimeRun) {
-    console.log('file changed');
     var currentTime = new Date().getTime();
 
     try {
@@ -12,7 +10,6 @@ parseLog = function(watchedFile, firstTimeRun) {
         if (firstTimeRun || lastLengths[filePath] != data.length) {
             lastLengths[filePath] = data.length;
             processLog(data.split(/\r?\n/), watchedFile);
-            console.log('updated source: ' + filePath);
         }
     } catch (exception) {
         console.log('failed to update source: ' + filePath + ", with reason: " + exception);
@@ -31,8 +28,8 @@ var processLog = function(data, watchedFile) {
     for (var index = data.length - 1; index >= 0; --index) {
         textArray.push(data[index]);
         var headers = parseHeaders(data[index].split(/\s+/), watchedFile.logPattern);
-        //last check required due to what it seems like to be a bug in momentjs' parser, when incorrect format is parsed to date
-        if ("timeStamp" in headers && headers["timeStamp"] != "Invalid Date" && headers["timeStamp"] > new Date(2010, 1, 1)) {
+        //last two checks required due to what it seems like to be a bug in momentjs' parser, when incorrect format is parsed to date
+        if ("timeStamp" in headers && headers["timeStamp"] != "Invalid Date" && headers["timeStamp"] > new Date(2010, 1, 1) && headers["timeStamp"] <= new Date()) {
             if (latestEntry == undefined || latestEntry.timeStamp <= headers["timeStamp"]) {
                 Log.upsert({
                     timeStamp: headers["timeStamp"],

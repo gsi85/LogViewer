@@ -11,11 +11,15 @@ WatchedFile.before.remove(function(userId, watchedFile) {
 
 
 addWatcher = function(watchedFile) {
-    watchers[watchedFile._id] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
-        parseLog(watchedFile);
-    }));
-    console.log("added watcher to " + watchedFile.filePath);
-    parseLog(watchedFile, true);
+    try {
+        watchers[watchedFile._id] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
+            parseLog(watchedFile);
+        }));
+        console.log("added watcher to " + watchedFile.filePath);
+        parseLog(watchedFile, true);
+    } catch (exception) {
+        console.log("failed to add watcher to " + watchedFile.filePath + ", with reason: " + exception);
+    }
 }
 
 removeWatcher = function(id, filePath) {
