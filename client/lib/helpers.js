@@ -17,7 +17,3 @@ Template.registerHelper('logPatterns', function() {
 Template.registerHelper('formatDate', function(date) {
     return moment(date).format('YYYY-MM-DD HH:mm:ss,SSS');
 });
-
-Template.registerHelper('formatLogText', function(text) {
-    return text.replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
-});

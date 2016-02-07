@@ -31,15 +31,16 @@ var processLog = function(data, watchedFile) {
         //last two checks required due to what it seems like to be a bug in momentjs' parser, when incorrect format is parsed to date
         if ("timeStamp" in headers && headers["timeStamp"] != "Invalid Date" && headers["timeStamp"] > new Date(2010, 1, 1) && headers["timeStamp"] <= new Date()) {
             if (latestEntry == undefined || latestEntry.timeStamp <= headers["timeStamp"]) {
+                var entryText = textArray.reverse().join("\n");
                 Log.upsert({
                     timeStamp: headers["timeStamp"],
                     source: watchedFile.filePath,
-                    text: textArray.reverse()
+                    text: entryText
                 }, {
                     $set: {
                         timeStamp: headers["timeStamp"],
                         source: watchedFile.filePath,
-                        text: textArray
+                        text: entryText
                     }
                 });
             }

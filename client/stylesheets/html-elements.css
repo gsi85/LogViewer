@@ -43,3 +43,7 @@ a:hover {
 a:active {
     color: green;
 }
+
+pre {
+    margin: 0;
+}

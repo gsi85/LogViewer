@@ -3,11 +3,7 @@ Meteor.startup(function() {
     LogPatterns.remove({});
 
     parsePatterns();
-
-    WatchedFile.find().forEach(function(watchedFile) {
-        addWatcher(watchedFile);
-    });
-
+    refreshFileWatchers();
     SyncedCron.start();
 
 });

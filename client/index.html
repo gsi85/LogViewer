@@ -64,9 +64,7 @@
     <td nowrap>{{formatDate timeStamp}}</td>
     <td>
       <div class="log-entry">
-        {{#each text}}
-          {{{formatLogText this}}}<br/>
-        {{/each}}
+          {{text}}
       </div>
       <div class="small-text">
         <span class="ligth-grey-text">source=</span>{{source}}
