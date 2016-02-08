@@ -9,9 +9,11 @@ Template.body.events({
                 logPattern: LogPatterns.findOne(event.target.logPattern.value)
             }, function(error, result) {
                 if (error) {
-                   template.$('#file-submit-error').html(error.reason);
+                    template.$('#file-submit-error').show();
+                    template.$('#file-submit-error').html(error.reason);
                 } else {
-                    template.$('#file-submit-error').html("");
+                    template.$('#file-submit-error').hide();
+                    template.$('#file-submit-error').html('');
                 }
             });
         }

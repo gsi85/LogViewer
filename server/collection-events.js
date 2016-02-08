@@ -3,6 +3,9 @@ var watchers = [];
 var throwNoFileException = function() {
     throw new Meteor.Error(500, 'No file exists at the provided file path');
 }
+var thowAlreadyAddedException = function() {
+    throw new Meteor.Error(500, 'File already watched');
+}
 
 WatchedFile.before.insert(function(userId, watchedFile) {
     try {
@@ -11,6 +14,11 @@ WatchedFile.before.insert(function(userId, watchedFile) {
         }
     } catch (exception) {
         throwNoFileException();
+    }
+    if (WatchedFile.findOne({
+            filePath: watchedFile.filePath
+        })) {
+        thowAlreadyAddedException();
     }
 });
 

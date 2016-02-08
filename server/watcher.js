@@ -10,9 +10,9 @@ var closeAllWathcers = function() {
     for (var key in watchers) {
         try {
             watchers[key].close();
-            console.log("removed watcher from " + watchers[key]);
+            console.log("removed watcher from " + key);
         } catch (exception) {
-            console.log("failed to remove watcher from " + watchers[key] + ", with reason: " + exception);
+            console.log("failed to remove watcher from " + key + ", with reason: " + exception);
         }
     }
     watchers = [];
@@ -21,7 +21,7 @@ var closeAllWathcers = function() {
 var addAllWatchers = function() {
     WatchedFile.find().forEach(function(watchedFile) {
         try {
-            watchers[watchedFile._id] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
+            watchers[watchedFile.filePath] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
                 parseLog(watchedFile);
             }));
             console.log("added watcher to " + watchedFile.filePath);
