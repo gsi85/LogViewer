@@ -20,6 +20,7 @@
         </ul>
         <div class="new-file-form-container">
           <form class="new-file-form">
+            <p class="error" id="file-submit-error">{{errorMessage}}</p>
             Select new log file to watch&nbsp;
             <input type="text" name="filePath" placeholder="Full file path" />
             <input type="text" name="alias" placeholder="Short name (optional)" />
@@ -37,7 +38,7 @@
 
     <table>
     <tr>
-      <th>Time</th>
+      <th class="time-header">Time</th>
       <th>Event</th>
     </tr>
       {{#each logs}}
@@ -63,9 +64,7 @@
   <tr>
     <td nowrap>{{formatDate timeStamp}}</td>
     <td>
-      <div class="log-entry">
-          {{text}}
-      </div>
+      <div class="log-entry">{{text}}</div>
       <div class="small-text">
         <span class="ligth-grey-text">source=</span>{{source}}
       </div>

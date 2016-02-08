@@ -15,12 +15,9 @@ td {
     padding: 5px;
 }
 
-tr {
-    max-width: 100%;
-}
-
 .log-entry {
     font-family: monospace;
     margin-bottom: 2px;
     white-space: pre-wrap;
+    word-wrap: break-word;
 }
