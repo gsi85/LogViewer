@@ -9,6 +9,12 @@
       <h1 class="large-text"><span class="bold-text">log_viewer</span> <span class="green-text">></span></h1>
     </header>
 
+    <div class="quick-filters-container">
+        {{#each quickFilters}}
+          {{> quickFilter}}
+        {{/each}}
+    </div>
+
     <div class="whatched-files-container">
       <a href="#hide" class="hide bold-text" id="hide"><div class="watched-files">Watched files</div><div class="arrow-right"></div></a>
       <a href="#show" class="show bold-text" id="show"><div class="watched-files">Watched files</div><div class="arrow-down"></div></a>
@@ -36,12 +42,6 @@
       </div>
     </div>
 
-    <div class="quick-filters-container">
-      {{#each quickFilters}}
-        {{> quickFilter}}
-      {{/each}}
-    </div>
-
     <table>
     <tr>
       <th class="time-header">Time</th>
@@ -55,15 +55,21 @@
   </div>
 </body>
 
+<template name="quickFilter">
+  <div class="green-text bold-text">{{name}}</div>
+  <div class="quick-filter-options">
+    <button class="all-filter-button submit-button-pushed">All</button>
+    {{#each categories}}
+      <button class="filter-button submit-button">{{this}}</button>
+    {{/each}}
+  </div>
+</template>
+
 <template name="watchedFile">
   <li>
     <button class="delete remove-button large-text">&times;</button>
     <span class="bold-text">{{alias}}</span> <span class="small-text">({{filePath}})</span>
   </li>
-</template>
-
-<template name="quickFilter">
-  {{name}}
 </template>
 
 <template name="logPattern">

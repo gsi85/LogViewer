@@ -1,0 +1,25 @@
+.submit-button {
+    border: 1px solid green;
+    color: green;
+    text-decoration: none;
+    background-color: white;
+    font-family: "Roboto","Droid","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.submit-button:hover {
+    color: white;
+    background-color: green;
+}
+
+.submit-button-pushed {
+    border: 1px solid green;
+    color: white;
+    background-color: green;
+    text-decoration: none;
+    font-family: "Roboto","Droid","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.submit-button-pushed:hover {
+    color: green;
+    background-color: white;
+}

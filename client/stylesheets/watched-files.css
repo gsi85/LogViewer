@@ -63,17 +63,3 @@
   text-decoration: none;
   border:1px solid #999;
 }
-
-.submit-button {
-  border: 1px solid green;
-  font-weight: bold;
-  color: green;
-  text-decoration: none;
-  background-color: white;
-  font-family: "Roboto","Droid","Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-.submit-button:hover {
-  color: white;
-  background-color: green;
-}

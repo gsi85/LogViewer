@@ -17,7 +17,6 @@ Template.body.events({
                 }
             });
         }
-
         event.target.filePath.value = "";
         event.target.alias.value = "";
     }
@@ -27,17 +26,4 @@ Template.watchedFile.events({
     "click .delete": function() {
         WatchedFile.remove(this._id);
     }
-});
-
-Template.body.onCreated(function() {
-    $(window).resize(function() {
-        var newMaxWidth = $(".whatched-files-container").width() - $(".time-header").width();
-        $(".log-entry").css({
-            "max-width": newMaxWidth + "px"
-        });
-    });
-});
-
-Template.body.onDestroyed(function() {
-    $(window).off('resize');
 });

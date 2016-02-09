@@ -1,6 +1,13 @@
 Meteor.startup(function() {
     clearCollections();
     publishCollections();
+
+    //TODO: just for testing purpose
+    QuickFilters.insert({
+        name: "Log level",
+        categories: []
+    });
+    
     parsePatterns();
     refreshFileWatchers();
     SyncedCron.start();

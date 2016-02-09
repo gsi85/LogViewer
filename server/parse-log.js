@@ -33,6 +33,7 @@ var processLog = function(data, watchedFile) {
             if (latestEntry == undefined || latestEntry.timeStamp <= headers["timeStamp"]) {
                 var entryText = textArray.reverse().join("\n");
                 upsertLogEntry(headers, watchedFile, entryText);
+                updateQuickFilterCategories(headers);
             }
             textArray = [];
         }
@@ -67,6 +68,22 @@ var upsertLogEntry = function(headers, watchedFile, entryText) {
             timeStamp: headers["timeStamp"],
             source: watchedFile.filePath,
             text: entryText
+        }
+    });
+}
+
+var updateQuickFilterCategories = function(headers) {
+    QuickFilters.find().forEach(function(quickFilter) {
+        if (quickFilter.name in headers) {
+            var categories = quickFilter.categories;
+            categories.push(headers[quickFilter.name]);
+            QuickFilters.upsert({
+                name: quickFilter.name
+            }, {
+                $set: {
+                    categories: Array.from(new Set(categories))
+                }
+            })
         }
     });
 }
