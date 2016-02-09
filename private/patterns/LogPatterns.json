@@ -1,7 +1,8 @@
 [{
     "name": "Logback",
     "prefixElements": [{
-        "name": "level"
+        "name": "log level",
+        "quickFilter": true
     }, {
         "name": "class name"
     }, {
@@ -23,7 +24,7 @@
     }, {
         "name": "time"
     }, {
-        "name": "level"
+        "name": "log level"
     }, {
         "name": "class name"
     }],

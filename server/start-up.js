@@ -1,7 +1,18 @@
 Meteor.startup(function() {
+    clearCollections();
+    publishCollections();
+    parsePatterns();
+    refreshFileWatchers();
+    SyncedCron.start();
+});
+
+var clearCollections = function() {
     Log.remove({});
     LogPatterns.remove({});
+    QuickFilters.remove({});
+}
 
+var publishCollections = function() {
     Meteor.publish("logs", function() {
         return Log.find();
     });
@@ -11,9 +22,7 @@ Meteor.startup(function() {
     Meteor.publish("logPatterns", function() {
         return LogPatterns.find();
     });
-
-    parsePatterns();
-    refreshFileWatchers();
-    SyncedCron.start();
-
-});
+    Meteor.publish("quickFilters", function() {
+        return QuickFilters.find();
+    });
+}

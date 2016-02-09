@@ -4,7 +4,7 @@ parsePatterns = function() {
 
     logPatterns.forEach(function(pattern) {
         LogPatterns.insert(pattern);
-        console.log('Loaded pattern with name: ' + pattern.name);
+        console.log('loaded pattern with name: ' + pattern.name);
     });
 
 };

@@ -31,4 +31,7 @@ WatchedFile.after.remove(function(userId, watchedFile) {
     Log.remove({
         source: watchedFile.filePath
     });
+    QuickFilters.remove({
+        source: watchedFile.filePath
+    });
 });

@@ -32,17 +32,7 @@ var processLog = function(data, watchedFile) {
         if ("timeStamp" in headers && headers["timeStamp"] != "Invalid Date" && headers["timeStamp"] > new Date(2010, 1, 1) && headers["timeStamp"] <= new Date()) {
             if (latestEntry == undefined || latestEntry.timeStamp <= headers["timeStamp"]) {
                 var entryText = textArray.reverse().join("\n");
-                Log.upsert({
-                    timeStamp: headers["timeStamp"],
-                    source: watchedFile.filePath,
-                    text: entryText
-                }, {
-                    $set: {
-                        timeStamp: headers["timeStamp"],
-                        source: watchedFile.filePath,
-                        text: entryText
-                    }
-                });
+                upsertLogEntry(headers, watchedFile, entryText);
             }
             textArray = [];
         }
@@ -65,4 +55,18 @@ var parseHeaders = function(data, logPattern) {
         headers["timeStamp"] = moment(timeStampToParse, logPattern.timeStamp.format).toDate();
     }
     return headers;
+}
+
+var upsertLogEntry = function(headers, watchedFile, entryText) {
+    Log.upsert({
+        timeStamp: headers["timeStamp"],
+        source: watchedFile.filePath,
+        text: entryText
+    }, {
+        $set: {
+            timeStamp: headers["timeStamp"],
+            source: watchedFile.filePath,
+            text: entryText
+        }
+    });
 }

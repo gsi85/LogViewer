@@ -24,6 +24,7 @@ var addAllWatchers = function() {
             watchers[watchedFile.filePath] = NpmFileSystem.watch(watchedFile.filePath, Meteor.bindEnvironment(function() {
                 parseLog(watchedFile);
             }));
+            refreshQuickFilterCategories(watchedFile);
             console.log("added watcher to " + watchedFile.filePath);
             parseLog(watchedFile, true);
         } catch (exception) {
@@ -31,3 +32,21 @@ var addAllWatchers = function() {
         }
     });
 }
+
+var refreshQuickFilterCategories = function(watchedFile) {
+    watchedFile.logPattern.prefixElements.forEach(function(prefixElement) {
+        if (prefixElement.quickFilter) {
+            var existingFilter = QuickFilters.findOne({
+                name: prefixElement.name
+            });
+            if (!existingFilter) {
+                QuickFilters.insert({
+                    name: prefixElement.name,
+                    source: watchedFile.filePath,
+                    categories: []
+                });
+                console.log('added quick filter category: ' + prefixElement.name);
+            }
+        }
+    });
+};
