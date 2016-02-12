@@ -56,9 +56,9 @@
 </body>
 
 <template name="quickFilter">
-  <div class="green-text bold-text">{{name}}</div>
   <div class="quick-filter-options">
-    <button class="all-filter-button submit-button-pushed">All</button>
+  <span class="green-text bold-text">{{name}}</span>
+    <button id="all-filter-button" class="submit-button-pushed">All</button>
     {{#each categories}}
       <button class="filter-button submit-button">{{this}}</button>
     {{/each}}
