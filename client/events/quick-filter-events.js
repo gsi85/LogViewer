@@ -1,6 +1,9 @@
+var quickFilters = {};
+
 Template.quickFilter.events({
     "click #all-filter-button": function(event) {
         setAllSelectedState(event.target);
+        Session.set("quickFilters", quickFilters);
     },
     "click .filter-button": function(event) {
         var button = event.target;
@@ -10,6 +13,7 @@ Template.quickFilter.events({
         } else {
             removeAllSelectedState(button);
         }
+        Session.set("quickFilters", quickFilters);
     }
 });
 
@@ -29,11 +33,13 @@ var setAllSelectedState = function(button) {
         $(button).parent().find("#all-filter-button").addClass("submit-button-pushed");
     }
     $(button).parent().find("#all-filter-button").removeClass("submit-button");
+    allSelectedQuickFilterState(button);
 }
 
 var togleButtonStyle = function(button) {
     $(button).toggleClass("submit-button-pushed");
     $(button).toggleClass("submit-button");
+    alterQuickFilterState(button);
 }
 
 var removeAllSelectedState = function(button) {
@@ -41,4 +47,25 @@ var removeAllSelectedState = function(button) {
         $(button).parent().find("#all-filter-button").addClass("submit-button");
     }
     $(button).parent().find("#all-filter-button").removeClass("submit-button-pushed");
+}
+
+var alterQuickFilterState = function(button) {
+    var filterCategory = $(button).parent().find("span:first-child").text();
+    var filteredValue = $(button).text();
+    if ($(button).hasClass("submit-button-pushed")) {
+        if (quickFilters[filterCategory]) {
+            quickFilters[filterCategory].push(filteredValue);
+        } else {
+            quickFilters[filterCategory] = [filteredValue];
+        }
+    } else {
+        console.log('delete');
+        delete quickFilters[filterCategory][filteredValue];
+        console.log(quickFilters);
+    }
+}
+
+var allSelectedQuickFilterState = function(button) {
+    var filterCategory = $(button).parent().find("span:first-child").text();
+    delete quickFilters[filterCategory];
 }

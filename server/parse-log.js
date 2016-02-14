@@ -41,7 +41,7 @@ var processLog = function(data, watchedFile) {
 };
 
 var parseHeaders = function(data, logPattern) {
-    var headers = [];
+    var headers = {};
     var prefixElements = logPattern.prefixElements;
     if (prefixElements.length <= data.length) {
         for (var index = 0; index < prefixElements.length; ++index) {
@@ -60,12 +60,11 @@ var parseHeaders = function(data, logPattern) {
 
 var upsertLogEntry = function(headers, watchedFile, entryText) {
     Log.upsert({
-        timeStamp: headers["timeStamp"],
         source: watchedFile.filePath,
         text: entryText
     }, {
         $set: {
-            timeStamp: headers["timeStamp"],
+            headers: headers,
             source: watchedFile.filePath,
             text: entryText
         }
