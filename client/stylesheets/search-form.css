@@ -1,0 +1,16 @@
+.search-field-container {
+    background-color: #e0e0e0;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.search-input {
+    font-family: monospace;
+    padding: 6px 6px 6px 6px;
+    width: 60%;
+}
+
+.search-icon {
+    bottom: -5px;
+    position: relative;
+}

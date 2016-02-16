@@ -1,6 +1,7 @@
 <head>
   <title>log_viewer></title>
   <meta charset="utf-8" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -8,6 +9,13 @@
     <header>
       <h1 class="large-text"><span class="bold-text">log_viewer</span> <span class="green-text">></span></h1>
     </header>
+
+    <div class="search-field-container">
+      <form class="search-form">
+        <input type="text" class="search-input" name="search" />
+        <span class="search-icon"><i class="w3-xxxlarge material-icons">search</i></span>
+      </form>
+    </div>
 
     <div class="quick-filters-container">
         {{#each quickFilters}}
