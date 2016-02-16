@@ -59,9 +59,7 @@ var alterQuickFilterState = function(button) {
             quickFilters[filterCategory] = [filteredValue];
         }
     } else {
-        console.log('delete');
-        delete quickFilters[filterCategory][filteredValue];
-        console.log(quickFilters);
+        quickFilters[filterCategory].splice(quickFilters[filterCategory].indexOf(filteredValue), 1);
     }
 }
 
