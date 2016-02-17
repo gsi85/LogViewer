@@ -1,14 +1,25 @@
 Template.registerHelper('logs', function() {
     if (Session.get("quickFilters") && Object.keys(Session.get("quickFilters")).length > 0) {
         return Log.find({
-            $or: buildQuickFilterSelector()
+            $and: [{
+                $or: buildQuickFilterSelector()
+            }, {
+                text: {
+                    $regex: getSearchRegex()
+                }
+            }]
+
         }, {
             sort: {
                 "headers.timeStamp": -1
             }
         });
     } else {
-        return Log.find({}, {
+        return Log.find({
+            text: {
+                $regex: getSearchRegex()
+            }
+        }, {
             sort: {
                 "headers.timeStamp": -1
             }
@@ -26,8 +37,11 @@ var buildQuickFilterSelector = function() {
             filterConditions.push(filterCondition);
         });
     }
-    console.log(filterConditions);
     return filterConditions;
+}
+
+var getSearchRegex = function() {
+    return Session.get('searchRegex') ? Session.get('searchRegex') : "";
 }
 
 Template.registerHelper('watchedFiles', function() {
