@@ -7,29 +7,29 @@ Meteor.startup(function() {
         name: "Log level",
         categories: []
     });
-    
-    parsePatterns();
-    refreshFileWatchers();
+
+    parsePatterns.parsePatterns();
+    refreshFileWatchers.refreshFileWatchers();
     SyncedCron.start();
+
+    function clearCollections() {
+        Log.remove({});
+        LogPatterns.remove({});
+        QuickFilters.remove({});
+    };
+
+    function publishCollections() {
+        Meteor.publish("logs", function() {
+            return Log.find();
+        });
+        Meteor.publish("watchedFiles", function() {
+            return WatchedFile.find();
+        });
+        Meteor.publish("logPatterns", function() {
+            return LogPatterns.find();
+        });
+        Meteor.publish("quickFilters", function() {
+            return QuickFilters.find();
+        });
+    }
 });
-
-var clearCollections = function() {
-    Log.remove({});
-    LogPatterns.remove({});
-    QuickFilters.remove({});
-}
-
-var publishCollections = function() {
-    Meteor.publish("logs", function() {
-        return Log.find();
-    });
-    Meteor.publish("watchedFiles", function() {
-        return WatchedFile.find();
-    });
-    Meteor.publish("logPatterns", function() {
-        return LogPatterns.find();
-    });
-    Meteor.publish("quickFilters", function() {
-        return QuickFilters.find();
-    });
-}

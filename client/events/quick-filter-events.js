@@ -21,7 +21,7 @@ var quickFilterEventModule = (function() {
 
     quickFilterEvent.allFilterButtonPressed = function(button) {
         setAllSelectedState(button);
-        Session.set("quickFilters", this.quickFilters);
+        Session.set("quickFilters", quickFilters);
     };
 
     quickFilterEvent.filterButtonPressed = function(button) {
@@ -86,5 +86,5 @@ var quickFilterEventModule = (function() {
     }
 
     return quickFilterEvent;
-    
+
 }());
